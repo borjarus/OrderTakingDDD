@@ -42,3 +42,17 @@ module Common =
 
         let create fieldName v =
             ConstrainedType.createDecimal fieldName KilogramQuantity 0.5M 100M v
+    
+    module WidgetCode = 
+        let value (WidgetCode code) = code 
+        
+        let create fieldName code =
+            let pattern = "W\d{4}$"
+            ConstrainedType.createLike fieldName WidgetCode pattern code
+
+    module GizmoCode = 
+        let value (GizmoCode code) = code 
+        
+        let create fieldName code =
+            let pattern = "G\d{3}$"
+            ConstrainedType.createLike fieldName GizmoCode pattern code

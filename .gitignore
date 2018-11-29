@@ -1,2 +1,7 @@
 bin/
 obj/
+.paket/
+.vs/
+paket-files/
+/paket.lock
+/paket.dependencies
