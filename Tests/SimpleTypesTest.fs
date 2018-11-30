@@ -147,3 +147,91 @@ type SimpleTypesTest () =
 
 
         sampleUnitQuantity |> should equal  17.45M
+
+     // OdrerId Tests 
+     [<Test>]
+     member x.``OdrerId must not to be empty"``() =
+        // SETUP
+        let sampleOdrerId = 
+            match (OdrerId.create "sampleOdrerId" "") with
+                | Ok v -> OdrerId.value(v)
+                | Error err -> err 
+        
+        sampleOdrerId |> should equal "sampleOdrerId: must not be null or empty"
+
+     [<Test>]
+     member x.``OdrerId length must not be greater than 50"``() =
+        // SETUP
+        let sampleOdrerId1 = 
+            match (OdrerId.create "sampleOdrerId1" "Praesent in mauris eu tortor porttitor accumsan Mauris suscipit") with
+                | Ok v -> OdrerId.value(v)
+                | Error err -> err 
+        
+        let sampleOdrerId2 = 
+            match (OdrerId.create "sampleOdrerId2" "Praesent in mauris eu tortor porttitor accumsan Mxx") with
+                | Ok v -> OdrerId.value(v)
+                | Error err -> err 
+
+        System.Console.WriteLine(sampleOdrerId2.Length.ToString())
+        
+        sampleOdrerId1 |> should equal "sampleOdrerId1: must not be more than 50 chars"
+        sampleOdrerId2 |> should equal "sampleOdrerId2: must not be more than 50 chars"
+
+     [<Test>]
+     member x.``OdrerId should return value"``() =
+        // SETUP
+        let sampleOdrerId1 = 
+            match (OdrerId.create "sampleOdrerId1" "id23") with
+                | Ok v -> OdrerId.value(v)
+                | Error err -> err 
+        let sampleOdrerId2 = 
+            match (OdrerId.create "sampleOdrerId2" "Praesent in mauris eu tortor porttitor accumsan Mx") with
+                | Ok v -> OdrerId.value(v)
+                | Error err -> err 
+        
+        sampleOdrerId1 |> should equal "id23"
+        sampleOdrerId2 |> should equal "Praesent in mauris eu tortor porttitor accumsan Mx"      
+
+      // OrderLineId Tests 
+     [<Test>]
+     member x.``OrderLineId must not to be empty"``() =
+        // SETUP
+        let sampleOrderLineId = 
+            match (OrderLineId.create "sampleOrderLineId" "") with
+                | Ok v -> OrderLineId.value(v)
+                | Error err -> err 
+        
+        sampleOrderLineId |> should equal "sampleOrderLineId: must not be null or empty"
+
+     [<Test>]
+     member x.``OrderLineId length must not be greater than 50"``() =
+        // SETUP
+        let sampleOrderLineId1 = 
+            match (OrderLineId.create "sampleOrderLineId1" "Praesent in mauris eu tortor porttitor accumsan Mauris suscipit") with
+                | Ok v -> OrderLineId.value(v)
+                | Error err -> err 
+        
+        let sampleOrderLineId2 = 
+            match (OrderLineId.create "sampleOrderLineId2" "Praesent in mauris eu tortor porttitor accumsan Mxx") with
+                | Ok v -> OrderLineId.value(v)
+                | Error err -> err 
+
+        System.Console.WriteLine(sampleOrderLineId2.Length.ToString())
+        
+        sampleOrderLineId1 |> should equal "sampleOrderLineId1: must not be more than 50 chars"
+        sampleOrderLineId2 |> should equal "sampleOrderLineId2: must not be more than 50 chars"
+
+     [<Test>]
+     member x.``OrderLineId should return value"``() =
+        // SETUP
+        let sampleOrderLineId1 = 
+            match (OrderLineId.create "sampleOrderLineId1" "id23") with
+                | Ok v -> OrderLineId.value(v)
+                | Error err -> err 
+        let sampleOrderLineId2 = 
+            match (OrderLineId.create "sampleOrderLineId2" "Praesent in mauris eu tortor porttitor accumsan Mx") with
+                | Ok v -> OrderLineId.value(v)
+                | Error err -> err 
+        
+        sampleOrderLineId1 |> should equal "id23"
+        sampleOrderLineId2 |> should equal "Praesent in mauris eu tortor porttitor accumsan Mx"      

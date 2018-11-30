@@ -20,8 +20,8 @@ module Common =
         | Unit of UnitQuantity
         | Kilos of KilogramQuantity
 
-    type OrderId = Undefined
-    type OrderLineId = Undefined
+    type OrderId = private OrderId of string
+    type OrderLineId = private OrderLineId of string 
     type CustomerId = Undefined
 
     type CustomerInfo = Undefined
@@ -56,3 +56,15 @@ module Common =
         let create fieldName code =
             let pattern = "G\d{3}$"
             ConstrainedType.createLike fieldName GizmoCode pattern code
+
+    module OdrerId =
+        let value (OrderId s) = s
+
+        let create fieldName s =
+            ConstrainedType.createString fieldName OrderId 50 s
+     
+    module OrderLineId =
+        let value (OrderLineId s) = s
+
+        let create fieldName s =
+            ConstrainedType.createString fieldName OrderLineId 50 s

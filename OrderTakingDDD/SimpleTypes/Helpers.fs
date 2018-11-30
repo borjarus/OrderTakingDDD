@@ -33,6 +33,16 @@ module Helpers =
             else
                 let msg = sprintf "%s: '%s' must match the pattern '%s'" fieldName s pattern
                 Error msg
+        
+        let createString fieldName ctor maxLen s =
+            if String.IsNullOrEmpty(s) then
+                let msg = sprintf "%s: must not be null or empty" fieldName 
+                Error msg
+            elif s.Length > maxLen then
+                let msg = sprintf "%s: must not be more than %i chars" fieldName maxLen 
+                Error msg 
+            else
+                Ok (ctor s)
 
 
 
